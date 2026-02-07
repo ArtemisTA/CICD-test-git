@@ -1,0 +1,27 @@
+steps:
+  # 1) terraform init (downloads provider)
+  - name: hashicorp/terraform:1.6
+    entrypoint: sh
+    args:
+      - -c
+      - |
+        terraform init -input=false
+
+  # 2) terraform fmt check (fails build if formatting is needed)
+  - name: hashicorp/terraform:1.6
+    args: ["fmt", "-check", "-recursive"]
+
+  # 3) terraform validate
+  - name: hashicorp/terraform:1.6
+    args: ["validate"]
+
+  # 4) terraform plan (no apply!)
+  - name: hashicorp/terraform:1.6
+    entrypoint: sh
+    args:
+      - -c
+      - |
+        terraform plan -input=false -no-color
+
+options:
+  logging: CLOUD_LOGGING_ONLY
