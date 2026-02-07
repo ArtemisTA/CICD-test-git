@@ -24,9 +24,6 @@ steps:
       - |
         terraform plan -input=false -no-color
         
-  # 5) terraform apply
-  - name: hashicorp/terraform:1.6
-    args: ["apply"]
 
 options:
   logging: CLOUD_LOGGING_ONLY
