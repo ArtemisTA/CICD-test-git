@@ -5,7 +5,8 @@ steps:
     args:
       - -c
       - |
-        terraform init -input=false
+        terraform plan -input=false -no-color -out=tfplan
+
 
   # 2) terraform fmt check (fails build if formatting is needed)
   - name: hashicorp/terraform:1.6
